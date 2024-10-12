@@ -10,11 +10,8 @@
  * Description: For each student, their name, level, total cards aquired, cards spent, and cards left to spend are 
  * recorded. There are three buttons the employees can use to modify these:
  *  - Add cards: When the students win challenges or win games or displays exemplary work, an instructor can reward them with punch cards.
- *  - Add stars: At the end of a tutoring session, an instructor adds up how many worksheets they completed, and rewards them a
- *               corresponding amount of stars. When a student reaches 24 stars, it automatically resets and adds another card to
- *               their card count. 
- *  - Use cards: A student can "purchase" a prize using the cards they have earned. Each prize has a designated price in amount of
- *               cards, so when a student gets a prize, an instructor will use the corresponding number of cards.
+ *  - Add stars: At the end of a tutoring session, an instructor adds up how many worksheets they completed, and rewards them a corresponding amount of stars. When a student reaches 24 stars, it automatically resets and adds another card to their card count. 
+ *  - Use cards: A student can "purchase" a prize using the cards they have earned. Each prize has a designated price in amount of cards, so when a student gets a prize, an instructor will use the corresponding number of cards.
  * 
  * Author: Elisabeth Tam
  * Email: elisabethtam3@gmail.com
