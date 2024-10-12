@@ -1,0 +1,264 @@
+<!--
+/*******************************************************
+ * Program Name: Mathnasium Punch Card Tracker
+ * Context: At Mathnasium, students are tutored in math by completing worksheets, and earning a star for each 
+ * worksheet they complete. When Level 1 Students earn 24 stars, a punch card is added to their card count. The 
+ * students can cash in their punch cards to earn prizes, with bigger prizes costing more punch cards. The longer
+ * a student keeps coming to Mathnasium, the higher of a Level they reach, and the less stars are required to earn
+ * a punch card. The punch cards and stars were manually tracked on Google Sheets, and employees had to
+ * calculate how many punch cards the students earned based on how many stars they previously had and how many they
+ * earned during a session. This program is meant to automate that process and make it easier for employees to
+ * track their students' punch cards. 
+ * Description: For each student, their name, level, total cards aquired, cards spent, and cards left to spend are 
+ * recorded. There are three buttons the employees can use to modify these:
+ *  - Add cards: When the students win challenges or win games or displays exemplary work, an instructor can reward them with punch cards.
+ *  - Add stars: At the end of a tutoring session, an instructor adds up how many worksheets they completed, and rewards them a
+ *               corresponding amount of stars. When a student reaches 24 stars, it automatically resets and adds another card to
+ *               their card count. 
+ *  - Use cards: A student can "purchase" a prize using the cards they have earned. Each prize has a designated price in amount of
+ *               cards, so when a student gets a prize, an instructor will use the corresponding number of cards.
+ * 
+ * Author: Elisabeth Tam
+ * Email: elisabethtam3@gmail.com
+ * Created: July 2024
+ * Comissioned by: Mathnasium of Northeast Parsippany, New Jersey
+ * 
+ * 
+ * Libraries/Dependencies: 
+ *    - To be updated
+ * 
+ * Version: 1.0
+ * 
+ * Notes:
+ *    - To be updated
+ *******************************************************/
+
+-->
+
+<!DOCTYPE html>
+
+<html>
+    <head>
+        <meta charset="utf-8">
+
+        <title>John Doe Punch Cards</title>
+
+        <style>
+            body {
+                background-color: white;
+                color: crimson;
+                font-family: "Arial";
+            }
+            button {
+                background-color: lightgray;
+                color: black;
+            } 
+            h2{
+                color: gray;
+                position: relative;
+                left:30px;
+            }
+            h3 {
+                color: black;
+            }
+            img {
+                border: 1px;
+            }
+            button {
+                font-size: 16px;
+            }
+            #header {
+                background-color: rgb(36,31,33);
+                width: 102%;
+                position: relative;
+                right: 9px;
+                bottom: 10px;
+            }
+            #myname {
+                background-color: rgb(36,31,33);
+                font-family: 'Courier New', Courier, monospace;
+                color: white;
+            }
+            td {
+                width:120px;
+                border: 1px solid;
+                border-color: black;
+            }
+            .computer{
+                display: block;
+                margin-left: auto;
+                margin-right: auto;
+            }
+            .tableElement{
+                background-color: lightpink;
+            }
+            #addStudent {
+                position: relative;
+                right: 20px;
+                font-size: 20px;
+                bottom: 70px;
+            }
+            #footer {
+                margin-top: 100px;
+                background-color: black;
+                width: 102%;
+                height: 100px;
+                position: relative;
+                right: 9px;
+                top: 20px;
+            }
+        </style>
+    </head>
+
+
+    <body>
+        <div id="header">
+            <img  id="headerlogo" src="mathnasium_logo.jpg.webp" height="100px">
+            <p id="myname">Elisabeth Tam ver 1.0</p>
+            <button id="addStudent" style="float: right;">Change Level</button>
+        </div>
+
+        
+        <h1>Student Name: John Doe</h1>
+        <h1>Mathlete Level: <span class="mathleteLevel"></span></h1>
+        <h2><span id="starsInCardNum"></span> stars per card</h2>
+
+
+        <h1>Current Card: <span id="currentCardNum"></span></h1>
+        <h2>Current Stars: <span id="currentStarsNum"></span></h2>
+
+        <h1>Cards Used: <span id="cardsUsedNum"></span></h1>
+
+        <h1>Cards Left: <span id="cardsLeftNum"></span></h1>
+
+        <button onclick="addCards()">Add Cards</button>
+        <button onclick="useCards()">Use Cards</button>
+        <button onclick="addStars()">Add Stars</button>
+
+        <!--8x3-->
+        <br><br>
+        <table id = "starsTable" border="2" cellpadding="10" cellspacing="0">
+            <tr> <!--class table element, fill table function-->
+                <td id="star1" ><img class="computer" src="mathnasium.png" width="75px"></td>
+                <td id="star2" ><img class="computer" src="mathnasium.png" width="75px"></td>
+                <td id="star3" ><img class="computer" src="mathnasium.png" width="75px"></td>
+                <td id="star4" ><img class="computer" src="mathnasium.png" width="75px"></td>
+                <td id="star5" ><img class="computer" src="mathnasium.png" width="75px"></td>
+                <td id="star6" ><img class="computer" src="mathnasium.png" width="75px"></td>
+                <td id="star7" ><img class="computer" src="mathnasium.png" width="75px"></td>
+                <td id="star8" ><img class="computer" src="mathnasium.png" width="75px"></td>
+            </tr>
+            <tr>
+                <td id="star9" ><img class="computer" src="mathnasium.png" width="75px"></td>
+                <td rowspan ="4" colspan="6" align="center"><h3>CURRENT CARD<br>MATHLETE LEVEL <span class="mathleteLevel"></span></h3></td>
+                <td id="star10" ><img class="computer" src="mathnasium.png" width="75px"></td>
+            </tr>
+            <tr>
+                <td id="star11" ><img class="computer" src="mathnasium.png" width="75px"></td>
+                <td id="star12" ><img class="computer" src="mathnasium.png" width="75px"></td>
+            </tr>
+            <tr>
+                <td id="star13" ><img class="computer" src="mathnasium.png" width="75px"></td>
+                <td id="star14" ><img class="computer" src="mathnasium.png" width="75px"></td>
+            </tr>
+            <tr>
+                <td id="star15" ><img class="computer" src="mathnasium.png" width="75px"></td>
+                <td id="star16" ><img class="computer" src="mathnasium.png" width="75px"></td>
+            </tr>
+            <tr>
+                <td id="star17" ><img class="computer" src="mathnasium.png" width="75px"></td>
+                <td id="star18" ><img class="computer" src="mathnasium.png" width="75px"></td>
+                <td id="star19" ><img class="computer" src="mathnasium.png" width="75px"></td>
+                <td id="star20" ><img class="computer" src="mathnasium.png" width="75px"></td>
+                <td id="star21" ><img class="computer" src="mathnasium.png" width="75px"></td>
+                <td id="star22" ><img class="computer" src="mathnasium.png" width="75px"></td>
+                <td id="star23" ><img class="computer" src="mathnasium.png" width="75px"></td>
+                <td id="star24" ><img class="computer" src="mathnasium.png" width="75px"></td>
+            </tr>
+        </table>
+        
+        <div id="footer"></div>
+
+        <script type="text/javascript">
+            var currentCardEl=0;
+            document.getElementById("currentCardNum").innerHTML=currentCardEl;
+
+            var currentStarsEl=0;
+            document.getElementById("currentStarsNum").innerHTML=currentStarsEl;
+
+            var cardsUsedEl=0;
+            document.getElementById("cardsUsedNum").innerHTML=cardsUsedEl;
+
+            var cardsLeftEl= currentCardEl - cardsUsedEl;
+            document.getElementById("cardsLeftNum").innerHTML=cardsLeftEl;
+
+            var mathleteLevel = document.getElementsByClassName("mathleteLevel");
+            for (var i = 0; i < mathleteLevel.length; i++) {
+                mathleteLevel[i].innerHTML = 1;
+            }
+
+            var starsInCard=24;
+            document.getElementById("starsInCardNum").innerHTML = starsInCard;
+
+
+            function addCards(){
+                var num=prompt("How many cards are you adding?","");
+                if (num!=null) {
+                    currentCardEl += parseInt(num);
+                    document.getElementById("currentCardNum").innerHTML=currentCardEl;
+
+                    cardsLeftEl = currentCardEl-cardsLeftEl;
+                    document.getElementById("cardsLeftNum").innerHTML=cardsLeftEl;
+                }
+            }
+
+            function addStars(){
+                var num=prompt("How many stars are you adding?","");
+                var temp = currentCardEl;
+                if (num!=null) {
+                    currentStarsEl += parseInt(num);
+                }
+                while (currentStarsEl >= starsInCard){
+                    currentStarsEl -= starsInCard;
+                    currentCardEl++;
+                }
+                document.getElementById("currentStarsNum").innerHTML = currentStarsEl;
+                document.getElementById("currentCardNum").innerHTML = currentCardEl;
+                cardsLeftEl = currentCardEl - cardsUsedEl;
+                document.getElementById("cardsLeftNum").innerHTML = cardsLeftEl;
+                //remove class list if it exists
+                if (temp != currentCardEl){
+                    for (var i = 1; i <= starsInCard; i++){
+                        var starNum = "star" + i;
+                        var hehe = document.getElementById(starNum);
+                        hehe.classList.remove("tableElement");
+                    } 
+                }
+                
+                for (var i = 1; i <= currentStarsEl; i++){
+                    var starNum = "star" + i;
+                    var hehe = document.getElementById(starNum);
+                    hehe.classList.add("tableElement");
+                }
+            }
+
+            function useCards(){
+                var num=prompt("How many cards are you using?","");
+                if (num > cardsLeftEl){
+                    alert("ERROR!");
+                    return;
+                }
+                if (num!=null) {
+                    cardsUsedEl += parseInt(num);
+                    document.getElementById("cardsUsedNum").innerHTML=cardsUsedEl;
+                    
+                    cardsLeftEl = currentCardEl-cardsUsedEl;
+                    document.getElementById("cardsLeftNum").innerHTML=cardsLeftEl;
+                }
+                
+            }
+        </script>
+
+    </body>
+</html>
+
